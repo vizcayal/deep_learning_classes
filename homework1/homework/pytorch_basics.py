@@ -325,4 +325,8 @@ class PyTorchBasics:
 
         Solution length: 64 characters
         """
-        raise NotImplementedError
+
+        diff = torch.abs(x[:, None] - y[None, :])
+        matches = (diff < 1e-3).any(dim=1)
+        count = matches.sum()
+        return count
